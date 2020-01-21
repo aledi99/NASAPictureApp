@@ -3,4 +3,6 @@
     <color name="colorPrimary">#000027</color>
     <color name="colorPrimaryDark">#000000</color>
     <color name="colorAccent">#240000</color>
+    <color name="date_background">#E1383030</color>
+    <color name="date_color">#C32020</color>
 </resources>

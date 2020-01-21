@@ -9,13 +9,17 @@ import androidx.fragment.app.Fragment;
 
 import android.salesianostriana.com.api.NasaApi;
 import android.salesianostriana.com.api.NasaPicture;
+import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.VideoView;
 
 import com.bumptech.glide.Glide;
+
+import java.io.File;
 
 
 public class HomeFragment extends Fragment {
@@ -53,11 +57,15 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(NasaPicture nasaPicture) {
+            String errorGif = "https://media.giphy.com/media/3osxY9kuM2NGUfvThe/giphy.gif";
+            Uri uri = Uri.fromFile(new File(nasaPicture.getUrl()));
             tvtTitle.setText(nasaPicture.getTitle());
             tvtDescription.setText(nasaPicture.getExplanation());
+            tvtDescription.setMovementMethod(new ScrollingMovementMethod());
             tvtDate.setText(nasaPicture.getDate());
 
-            Glide.with(HomeFragment.this).load(nasaPicture.getUrl()).into(ivPhoto);
+            Glide.with(HomeFragment.this).load(nasaPicture.getUrl()).error(Glide.with(HomeFragment.this).load(errorGif)).into(ivPhoto);
+
 
 
         }
