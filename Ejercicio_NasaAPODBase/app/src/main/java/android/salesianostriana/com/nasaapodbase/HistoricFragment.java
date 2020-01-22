@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.salesianostriana.com.nasaapodbase.dummy.DummyContent;
 import android.salesianostriana.com.nasaapodbase.dummy.DummyContent.DummyItem;
+import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -40,9 +41,6 @@ public class HistoricFragment extends Fragment {
     int mColumnCount = 2;
     RecyclerView recyclerView;
     IPhotosListener mListener;
-    GridView gvHistoric;
-    TextView tvtError;
-    ImageView ivError;
     NasaApi nasaApi = new NasaApi("tH7fKpbpVD9ciN9BMQKqeSc4sDNDIqdDsrBYt0Qg");
     List<NasaPicture> photos = new ArrayList<NasaPicture>();
     LocalDate today = LocalDate.now();
@@ -62,6 +60,7 @@ public class HistoricFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_historic_list, container, false);
+        view.setBackgroundColor(getResources().getColor(R.color.colorAccent));
 
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
@@ -74,9 +73,9 @@ public class HistoricFragment extends Fragment {
                 recyclerView.setLayoutManager(new GridLayoutManager(context, mColumnCount));
             }
 
-            tvtError = view.findViewById(R.id.textViewError);
-            ivError = view.findViewById(R.id.imageViewError);
 
+            //Constancia de intentar dar a entender al usuario desde este tab que habia un error de
+            //la API.
             //tvtError.setVisibility(View.GONE);
             //ivError.setVisibility(View.GONE);
 
@@ -119,17 +118,13 @@ public class HistoricFragment extends Fragment {
         protected void onPostExecute(List<NasaPicture> nasaPictures) {
             List<NasaPicture> s = nasaPictures;
 
-            if(nasaPictures == null) {
-                tvtError.setVisibility(View.VISIBLE);
-                ivError.setVisibility(View.VISIBLE);
-
-                tvtError.setText(apiError.getTextError());
-                Glide.with(mContext).load(apiError.getUrlError()).into(ivError);
-            } else {
                 Collections.reverse(s);
                 MyHistoricRecyclerViewAdapter photosAdapter = new MyHistoricRecyclerViewAdapter(mContext, R.layout.recycler_historic, s);
                 recyclerView.setAdapter(photosAdapter);
-            }
+
+
+
+
 
         }
     }

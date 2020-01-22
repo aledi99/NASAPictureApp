@@ -14,6 +14,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.salesianostriana.com.nasaapodbase.ui.main.SectionsPagerAdapter;
+import android.widget.Toast;
 
 public class BaseActivity extends AppCompatActivity implements IPhotosListener {
 

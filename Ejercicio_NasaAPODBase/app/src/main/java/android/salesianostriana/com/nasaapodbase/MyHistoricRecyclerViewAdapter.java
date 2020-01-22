@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
+import android.content.Intent;
 import android.salesianostriana.com.api.NasaPicture;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import android.salesianostriana.com.nasaapodbase.dummy.DummyContent.DummyItem;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 
@@ -23,6 +25,7 @@ import java.util.List;
  * TODO: Replace the implementation with code for your data type.
  */
 public class MyHistoricRecyclerViewAdapter extends RecyclerView.Adapter<MyHistoricRecyclerViewAdapter.ViewHolder> {
+    APIError apiError = new APIError();
     Context ctx;
     int layoutPlantilla;
     List<NasaPicture> listData;
@@ -42,11 +45,22 @@ public class MyHistoricRecyclerViewAdapter extends RecyclerView.Adapter<MyHistor
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final ViewHolder holder, int position) {
         holder.mItem = listData.get(position);
         holder.tvDate.setText(holder.mItem.getDate());
+        Glide.with(ctx).load(holder.mItem.getUrl()).error(Glide.with(ctx).load(apiError.getUrlError())).into(holder.ivPhoto);
 
-        Glide.with(ctx).load(holder.mItem.getUrl()).into(holder.ivPhoto);
+        holder.ivPhoto.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(ctx, DetailActivity.class);
+                i.putExtra("url", holder.mItem.getUrl());
+                i.putExtra("title", holder.mItem.getTitle());
+                i.putExtra("explanation", holder.mItem.getExplanation());
+                i.putExtra("date", holder.mItem.getDate());
+                ctx.startActivity(i);
+            }
+        });
 
     }
 

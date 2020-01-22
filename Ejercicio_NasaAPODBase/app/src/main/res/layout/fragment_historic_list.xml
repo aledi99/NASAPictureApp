@@ -5,7 +5,7 @@
     android:id="@+id/list"
     android:name="android.salesianostriana.com.nasaapodbase.HistoricFragment"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="600dp"
     android:layout_alignWithParentIfMissing="false"
     android:layout_centerInParent="false"
     android:layout_marginLeft="16dp"
