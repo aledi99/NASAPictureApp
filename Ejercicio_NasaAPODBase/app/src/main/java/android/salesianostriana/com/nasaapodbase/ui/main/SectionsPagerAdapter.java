@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 
+import android.salesianostriana.com.nasaapodbase.HistoricFragment;
 import android.salesianostriana.com.nasaapodbase.HomeFragment;
-import android.salesianostriana.com.nasaapodbase.PhotosFragment;
 import android.salesianostriana.com.nasaapodbase.R;
 
 /**
@@ -35,7 +35,7 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
                 return new HomeFragment();
 
             case 1:
-                return new PhotosFragment();
+                return new HistoricFragment();
         }
         return null;
 

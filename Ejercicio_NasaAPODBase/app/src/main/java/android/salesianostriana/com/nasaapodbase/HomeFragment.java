@@ -23,9 +23,11 @@ import java.io.File;
 
 
 public class HomeFragment extends Fragment {
+    APIError apiError = new APIError();
     ImageView ivPhoto;
     TextView tvtTitle;
     TextView tvtDescription;
+    TextView tvtError;
     TextView tvtDate;
     NasaApi nasaApi = new NasaApi("tH7fKpbpVD9ciN9BMQKqeSc4sDNDIqdDsrBYt0Qg");
     NasaPicture photo;
@@ -34,11 +36,13 @@ public class HomeFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_home, container, false);
-
         ivPhoto = view.findViewById(R.id.imageViewPhoto);
         tvtTitle = view.findViewById(R.id.textViewTitle);
         tvtDescription = view.findViewById(R.id.textViewDescr);
         tvtDate = view.findViewById(R.id.textViewDate);
+        tvtError = view.findViewById(R.id.textViewError);
+
+        tvtError.setVisibility(View.GONE);
 
 
         new PhotoToday().execute();
@@ -57,16 +61,27 @@ public class HomeFragment extends Fragment {
 
         @Override
         protected void onPostExecute(NasaPicture nasaPicture) {
-            String errorGif = "https://media.giphy.com/media/3osxY9kuM2NGUfvThe/giphy.gif";
-            Uri uri = Uri.fromFile(new File(nasaPicture.getUrl()));
-            tvtTitle.setText(nasaPicture.getTitle());
-            tvtDescription.setText(nasaPicture.getExplanation());
-            tvtDescription.setMovementMethod(new ScrollingMovementMethod());
-            tvtDate.setText(nasaPicture.getDate());
 
-            Glide.with(HomeFragment.this).load(nasaPicture.getUrl()).error(Glide.with(HomeFragment.this).load(errorGif)).into(ivPhoto);
+            if(nasaPicture == null) {
+                tvtTitle.setVisibility(View.GONE);
+                tvtDescription.setVisibility(View.GONE);
+                tvtDescription.setVisibility(View.GONE);
+                tvtDate.setVisibility(View.GONE);
+                tvtError.setVisibility(View.VISIBLE);
+                tvtError.setText(apiError.getTextError());
 
+                Glide.with(HomeFragment.this).load(apiError.getUrlError()).into(ivPhoto);
 
+            } else {
+
+                tvtTitle.setText(nasaPicture.getTitle());
+                tvtDescription.setText(nasaPicture.getExplanation());
+                tvtDescription.setMovementMethod(new ScrollingMovementMethod());
+                tvtDate.setText(nasaPicture.getDate());
+
+                Glide.with(HomeFragment.this).load(nasaPicture.getUrl()).error(Glide.with(HomeFragment.this).load(apiError.getUrlError())).into(ivPhoto);
+
+            }
 
         }
     }

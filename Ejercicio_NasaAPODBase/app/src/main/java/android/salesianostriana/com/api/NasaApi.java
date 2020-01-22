@@ -9,6 +9,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -30,13 +31,17 @@ public class NasaApi {
     OkHttpClient client;
 
 
+
     /**
      * Constructor de la clase.
      * @param key API_KEY necesaria para hacer las peticiones
      */
     public NasaApi(String key) {
         this.api_key = key;
-        client = new OkHttpClient();
+        client = new OkHttpClient.Builder()
+                .readTimeout(10, TimeUnit.SECONDS)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .build();
     }
 
     /**

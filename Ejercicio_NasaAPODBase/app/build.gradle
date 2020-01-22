@@ -38,4 +38,6 @@ dependencies {
     implementation 'jp.wasabeef:glide-transformations:4.0.0'
     // If you want to use the GPU Filters
     implementation 'jp.co.cyberagent.android:gpuimage:2.0.0'
+    implementation 'net.danlew:android.joda:2.10.3'
+    implementation 'androidx.gridlayout:gridlayout:1.0.0'
 }

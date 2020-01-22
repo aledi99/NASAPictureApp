@@ -9,12 +9,13 @@ import com.google.android.material.tabs.TabLayout;
 import androidx.viewpager.widget.ViewPager;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.salesianostriana.com.api.NasaPicture;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.salesianostriana.com.nasaapodbase.ui.main.SectionsPagerAdapter;
 
-public class BaseActivity extends AppCompatActivity {
+public class BaseActivity extends AppCompatActivity implements IPhotosListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,11 @@ public class BaseActivity extends AppCompatActivity {
         viewPager.setAdapter(sectionsPagerAdapter);
         TabLayout tabs = findViewById(R.id.tabs);
         tabs.setupWithViewPager(viewPager);
+
+    }
+
+    @Override
+    public void onPhotosClick(NasaPicture r) {
 
     }
 }
