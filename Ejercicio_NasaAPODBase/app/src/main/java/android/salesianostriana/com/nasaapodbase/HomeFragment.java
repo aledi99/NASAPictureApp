@@ -5,6 +5,7 @@ import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.salesianostriana.com.api.NasaApi;
@@ -13,6 +14,8 @@ import android.text.method.ScrollingMovementMethod;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.VideoView;
@@ -22,7 +25,7 @@ import com.bumptech.glide.Glide;
 import java.io.File;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment{
     APIError apiError = new APIError();
     ImageView ivPhoto;
     TextView tvtTitle;

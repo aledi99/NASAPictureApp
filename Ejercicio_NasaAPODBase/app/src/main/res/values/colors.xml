@@ -5,4 +5,5 @@
     <color name="colorAccent">#240000</color>
     <color name="date_background">#E1383030</color>
     <color name="date_color">#C32020</color>
+    <color name="text_color">#D8B8B8</color>
 </resources>
